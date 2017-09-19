@@ -3,12 +3,11 @@ package com.assessment.services.repositories;/**
  */
 
 import com.assessment.services.domain.QuestionBank;
-import org.springframework.data.repository.CrudRepository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Arrays;
-
 @Repository
-public interface QuestionBankRepository extends CrudRepository<QuestionBank, Long>{
+public interface QuestionBankRepository extends JpaRepository<QuestionBank, Long>{
 
 }

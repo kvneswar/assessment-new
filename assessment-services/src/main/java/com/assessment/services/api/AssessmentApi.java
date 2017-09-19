@@ -18,46 +18,77 @@ public class AssessmentApi {
     @Autowired
     private AssessmentService assessmentService;
 
-    @GetMapping(value = "/questionPapers/{id}")
-    public QuestionPaper getQuestionPapers(@PathVariable("id") String id){
-        return assessmentService.getQuestionPaper(new Long(id));
-    }
-
     @GetMapping(value = "/questionPapers")
     public List<QuestionPaper> getAllQuestionPapers() {
         return assessmentService.getAllQuestionPapers();
     }
+    
+    @GetMapping(value = "/questionPaper")
+    public List<QuestionPaper> getAllQuestionPapers(@RequestParam List<Long> ids) {
+        return assessmentService.getAllQuestionPapers();
+    }
+    
+    @GetMapping(value = "/questionPaper/{id}")
+    public QuestionPaper getQuestionPapers(@PathVariable("id") String id){
+        return assessmentService.getQuestionPaper(new Long(id));
+    }
 
-    @PostMapping(value = "/questionPapers")
+    @PostMapping(value = "/questionPaper")
     public QuestionPaper saveQuestionPaper(@RequestBody QuestionPaper questionPaper) {
         return assessmentService.addQuestionPaper(questionPaper);
     }
-
+    
+    @DeleteMapping(value = "/questionPaper/{id}")
+    public void deleteQuestionPaper(@PathVariable("id") Long id) {
+        assessmentService.deleteAQuestionPaper(id);
+    }
+    
     @DeleteMapping(value = "/questionPapers")
     public void deleteAll() {
         assessmentService.deleteAllQuestionPapers();
     }
-
-    @GetMapping(value = "/questions/{id}")
-    public QuestionBank getQuestion(@PathVariable("id") String id){
-        return assessmentService.getQuestion(new Long(id));
-    }
-
+    
+    
+    
+    
+    
     @GetMapping(value = "/questions")
     public List<QuestionBank> getAllQuestion(){
         return assessmentService.getAllQuestions();
     }
+    
+    @GetMapping(value = "/question")
+    public List<QuestionBank> getQuestionsByIds(@RequestParam(name="ids") List<Long> ids){
+    	return assessmentService.getQuestionsByIds(ids);
+    }
 
-    @PostMapping(value = "/questions")
-    public QuestionBank saveQuestionBank(@RequestBody QuestionBank question) {
+    @GetMapping(value = "/question/{id}")
+    public QuestionBank getQuestion(@PathVariable("id") Long id){
+        return assessmentService.getQuestion(id);
+    }
+
+    @PostMapping(value = "/question")
+    public QuestionBank saveQuestionk(@RequestBody QuestionBank question) {
         return assessmentService.addQuestion(question);
+    }
+    
+    @PostMapping(value = "/questions")
+    public List<QuestionBank> saveQuestionk(@RequestBody List<QuestionBank> questions) {
+        return assessmentService.addQuestions(questions);
     }
 
     @DeleteMapping(value = "/questions")
     public void deleteAllQuestions() {
         assessmentService.deleteAllQuestions();
     }
+    
+    @DeleteMapping(value = "/question/{id}")
+    public void deleteAllQuestions(@PathVariable Long id) {
+        assessmentService.deleteAQuestion(id);
+    }
 
+    
+    
     
     
     
@@ -67,13 +98,13 @@ public class AssessmentApi {
     }
     
     @GetMapping(value = "/test")
-    public List<Test> getTestsByIds(@RequestParam(name="ids", required=true) List<Long> ids){
+    public List<Test> getTestsByIds(@RequestParam(name="ids") List<Long> ids){
         return assessmentService.getAllTests(ids);
     }
 
     @GetMapping(value = "/test/{id}")
-    public Test test(@PathVariable("id") String id){
-        return assessmentService.getTest(new Long(id));
+    public Test test(@PathVariable("id") Long id){
+        return assessmentService.getTest(id);
     }
 
     @PostMapping(value = "/test")

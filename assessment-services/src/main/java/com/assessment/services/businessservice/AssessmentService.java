@@ -8,7 +8,6 @@ import com.assessment.services.domain.Test;
 import com.assessment.services.repositories.QuestionBankRepository;
 import com.assessment.services.repositories.QuestionPaperRepository;
 import com.assessment.services.repositories.TestRepository;
-import org.apache.commons.collections.IteratorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,22 +26,31 @@ public class AssessmentService {
     private TestRepository testRepository;
 
 
-    public void addQuestions(List<QuestionBank> questions) {
-        questionBankRepository.save(questions);
+    public List<QuestionBank> addQuestions(List<QuestionBank> questions) {
+        return questionBankRepository.save(questions);
     }
 
     public QuestionBank addQuestion(QuestionBank question) {
         return questionBankRepository.save(question);
     }
+    
 
     public QuestionPaper addQuestionPaper(QuestionPaper questionPaper) {
         return questionPaperRepository.save(questionPaper);
+    }
+    
+    public List<QuestionPaper> addQuestionPaper(List<QuestionPaper> questionPapers) {
+        return questionPaperRepository.save(questionPapers);
     }
 
     public void addQuestionPapers(List<QuestionPaper> questionPapers) {
         questionPaperRepository.save(questionPapers);
     }
 
+    public void deleteAQuestionPaper(Long id) {
+        questionPaperRepository.delete(id);
+    }
+    
     public void deleteAllQuestionPapers() {
         questionPaperRepository.deleteAll();
     }
@@ -52,7 +60,11 @@ public class AssessmentService {
     }
 
     public List<QuestionPaper> getAllQuestionPapers() {
-        return IteratorUtils.toList(questionPaperRepository.findAll().iterator());
+        return questionPaperRepository.findAll();
+    }
+    
+    public List<QuestionPaper> getAllQuestionPapersBasedOnIds(List<Long> ids) {
+        return questionPaperRepository.findAll(ids);
     }
 
     public QuestionBank getQuestion(Long id) {
@@ -60,11 +72,19 @@ public class AssessmentService {
     }
 
     public List<QuestionBank> getAllQuestions() {
-        return IteratorUtils.toList(questionBankRepository.findAll().iterator());
+        return questionBankRepository.findAll();
     }
 
+    public List<QuestionBank> getQuestionsByIds(List<Long> ids) {
+		return questionBankRepository.findAll(ids);
+	}
+    
     public void deleteAllQuestions() {
         questionBankRepository.deleteAll();
+    }
+    
+    public void deleteAQuestion(Long id) {
+        questionBankRepository.delete(id);
     }
 
 
@@ -95,6 +115,7 @@ public class AssessmentService {
     public void deleteATest(long id) {
         testRepository.delete(id);
     }
+
     
     
     

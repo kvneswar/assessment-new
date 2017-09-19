@@ -11,7 +11,13 @@ public class QuestionPaper {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    
+    private String schoolCode;
+    
+    private String questionPaperName;
+    
+    private String questionPaperDescription;
+    
     @ManyToOne
     private Test test;
 
@@ -48,4 +54,28 @@ public class QuestionPaper {
     public void setQuestions(List<QuestionBank> questions) {
         this.questions = questions;
     }
+
+	public String getSchoolCode() {
+		return schoolCode;
+	}
+
+	public void setSchoolCode(String schoolCode) {
+		this.schoolCode = schoolCode;
+	}
+
+	public String getQuestionPaperName() {
+		return questionPaperName;
+	}
+
+	public void setQuestionPaperName(String questionPaperName) {
+		this.questionPaperName = questionPaperName;
+	}
+
+	public String getQuestionPaperDescription() {
+		return questionPaperDescription;
+	}
+
+	public void setQuestionPaperDescription(String questionPaperDescription) {
+		this.questionPaperDescription = questionPaperDescription;
+	}
 }
