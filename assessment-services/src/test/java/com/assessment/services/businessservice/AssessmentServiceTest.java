@@ -32,7 +32,7 @@ public class AssessmentServiceTest {
                 .accept(ContentType.JSON).contentType(ContentType.JSON);
     }
 
-    @Test
+    //@Test
     public void test() {
 
         // Delete all data before inserting
@@ -124,7 +124,7 @@ public class AssessmentServiceTest {
         QuestionPaper responseQuestionPaper2 = executePOST(baseUrl + "/questionPapers", questionPaper3).as(QuestionPaper.class);
     }
 
-    @Test
+    //@Test
     public void testAddQuestionsToExistingQuestionPaper() {
 
         List<QuestionBank> allQuestions = Arrays.asList(executeGET(baseUrl + "/questions").body().as(QuestionBank[].class));

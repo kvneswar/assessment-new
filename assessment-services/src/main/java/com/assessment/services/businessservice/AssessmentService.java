@@ -5,9 +5,12 @@ package com.assessment.services.businessservice;/**
 import com.assessment.services.domain.QuestionBank;
 import com.assessment.services.domain.QuestionPaper;
 import com.assessment.services.domain.Test;
+import com.assessment.services.domain.TestResults;
 import com.assessment.services.repositories.QuestionBankRepository;
 import com.assessment.services.repositories.QuestionPaperRepository;
 import com.assessment.services.repositories.TestRepository;
+import com.assessment.services.repositories.TestResultsRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +27,9 @@ public class AssessmentService {
     
     @Autowired
     private TestRepository testRepository;
+    
+    @Autowired
+    private TestResultsRepository testResultsRepository; 
 
 
     public List<QuestionBank> addQuestions(List<QuestionBank> questions) {
@@ -118,5 +124,28 @@ public class AssessmentService {
 
     
     
+    public List<TestResults> getTestResults(){
+    	return testResultsRepository.findAll();
+    }
+    
+    public List<TestResults> getTestResultsBasedOnIds(List<Long> ids){
+    	return testResultsRepository.findAll(ids);
+    }
+    
+    public TestResults getTestResultBasedOnId(long id){
+    	return testResultsRepository.findOne(id);
+    }
+    
+    public TestResults saveTestResult(TestResults testResults){
+    	return testResultsRepository.save(testResults);
+    }
+    
+    public List<TestResults> saveTestResults(List<TestResults> testResults){
+    	return testResultsRepository.save(testResults);
+    }
+    
+    public void deleteTestResult(long id){
+    	testResultsRepository.delete(id);
+    }
     
 }
