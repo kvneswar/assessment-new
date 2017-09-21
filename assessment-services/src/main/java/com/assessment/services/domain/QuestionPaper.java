@@ -3,6 +3,10 @@ package com.assessment.services.domain;/**
  */
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -11,12 +15,14 @@ public class QuestionPaper {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
     private String schoolCode;
-    
     private String questionPaperName;
-    
     private String questionPaperDescription;
+    private int maxMarks;
+    @JsonFormat(pattern = "YYYY-MM-DD hh:mm:ss")
+    private Date scheduledStartDate;
+    @JsonFormat(pattern = "YYYY-MM-DD hh:mm:ss")
+    private Date scheduledEndDate;
     
     @ManyToOne
     private Test test;
@@ -77,5 +83,29 @@ public class QuestionPaper {
 
 	public void setQuestionPaperDescription(String questionPaperDescription) {
 		this.questionPaperDescription = questionPaperDescription;
+	}
+
+	public int getMaxMarks() {
+		return maxMarks;
+	}
+
+	public void setMaxMarks(int maxMarks) {
+		this.maxMarks = maxMarks;
+	}
+
+	public Date getScheduledStartDate() {
+		return scheduledStartDate;
+	}
+
+	public void setScheduledStartDate(Date scheduledStartDate) {
+		this.scheduledStartDate = scheduledStartDate;
+	}
+
+	public Date getScheduledEndDate() {
+		return scheduledEndDate;
+	}
+
+	public void setScheduledEndDate(Date scheduledEndDate) {
+		this.scheduledEndDate = scheduledEndDate;
 	}
 }

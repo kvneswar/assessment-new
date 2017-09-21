@@ -1,6 +1,4 @@
-package com.assessment.services.domain;/**
- * Created by Anand Tadepalli on 9/16/2017.
- */
+package com.assessment.services.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 @Entity
-public class Test {
+public class Test{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,12 +20,15 @@ public class Test {
     private String testDescription;
     private String courseId;
     private String classroomList;
-    private int maxMarks;
-    private int timeLimit;
+    private int totalMarks;
     @JsonFormat(pattern = "YYYY-MM-DD hh:mm:ss")
-    private Date scheduledDate;
-    
-	public long getId() {
+    private Date scheduledStartDate;
+    @JsonFormat(pattern = "YYYY-MM-DD hh:mm:ss")
+    private Date scheduledEndDate;
+	
+    public long getId() {
+    	
+    	
 		return id;
 	}
 	public void setId(long id) {
@@ -63,32 +64,31 @@ public class Test {
 	public void setClassroomList(String classroomList) {
 		this.classroomList = classroomList;
 	}
-	public int getMaxMarks() {
-		return maxMarks;
+	public int getTotalMarks() {
+		return totalMarks;
 	}
-	public void setMaxMarks(int maxMarks) {
-		this.maxMarks = maxMarks;
+	public void setTotalMarks(int totalMarks) {
+		this.totalMarks = totalMarks;
 	}
-	public int getTimeLimit() {
-		return timeLimit;
+	public Date getScheduledStartDate() {
+		return scheduledStartDate;
 	}
-	public void setTimeLimit(int timeLimit) {
-		this.timeLimit = timeLimit;
+	public void setScheduledStartDate(Date scheduledStartDate) {
+		this.scheduledStartDate = scheduledStartDate;
 	}
-	public Date getScheduledDate() {
-		return scheduledDate;
+	public Date getScheduledEndDate() {
+		return scheduledEndDate;
 	}
-	public void setScheduledDate(Date scheduledDate) {
-		this.scheduledDate = scheduledDate;
+	public void setScheduledEndDate(Date scheduledEndDate) {
+		this.scheduledEndDate = scheduledEndDate;
 	}
 	
 	@Override
 	public String toString() {
 		return "Test [id=" + id + ", schoolCode=" + schoolCode + ", name=" + name + ", testDescription="
-				+ testDescription + ", courseId=" + courseId + ", classroomList=" + classroomList + ", maxMarks="
-				+ maxMarks + ", timeLimit=" + timeLimit + ", scheduledDate=" + scheduledDate + "]";
+				+ testDescription + ", courseId=" + courseId + ", classroomList=" + classroomList + ", totalMarks="
+				+ totalMarks + ", scheduledStartDate=" + scheduledStartDate + ", scheduledEndDate=" + scheduledEndDate
+				+ "]";
 	}
 	
-	
-
 }
