@@ -12,6 +12,8 @@ import com.assessment.services.repositories.TestRepository;
 import com.assessment.services.repositories.TestResultsRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -65,24 +67,24 @@ public class AssessmentService {
         return questionPaperRepository.findOne(id);
     }
 
-    public List<QuestionPaper> getAllQuestionPapers() {
-        return questionPaperRepository.findAll();
+    public Page<QuestionPaper> getAllQuestionPapers(String schoolCode, Pageable pageable) {
+        return questionPaperRepository.findAllBySchoolCode(schoolCode, pageable);
     }
     
-    public List<QuestionPaper> getAllQuestionPapersBasedOnIds(List<Long> ids) {
-        return questionPaperRepository.findAll(ids);
+    public Page<QuestionPaper> getAllQuestionPapersBasedOnIds(String schoolCode, List<Long> ids, Pageable pageable) {
+        return questionPaperRepository.findAllBySchoolCodeAndIdIn(schoolCode, ids, pageable);
     }
 
     public QuestionBank getQuestion(Long id) {
         return questionBankRepository.findOne(id);
     }
 
-    public List<QuestionBank> getAllQuestions() {
-        return questionBankRepository.findAll();
+    public Page<QuestionBank> getAllQuestions(String schoolCode, Pageable pageable) {
+        return questionBankRepository.findAllBySchoolCode(schoolCode, pageable);
     }
 
-    public List<QuestionBank> getQuestionsByIds(List<Long> ids) {
-		return questionBankRepository.findAll(ids);
+    public Page<QuestionBank> getQuestionsByIds(String schoolCode, List<Long> ids, Pageable pageable) {
+		return questionBankRepository.findAllBySchoolCodeAndIdIn(schoolCode, ids, pageable);
 	}
     
     public void deleteAllQuestions() {
@@ -94,12 +96,12 @@ public class AssessmentService {
     }
 
 
-    public List<Test> getAllTests(){
-    	return testRepository.findAll();
+    public Page<Test> getAllTests(String schoolCode, Pageable pageable){
+    	return testRepository.findAllBySchoolCode(schoolCode, pageable);
     }
     
-    public List<Test> getAllTests(List<Long> ids){
-    	return testRepository.findAll(ids);
+    public Page<Test> getAllTests(String schoolCode, List<Long> ids, Pageable pageable){
+    	return testRepository.findAllBySchoolCodeAndIdIn(schoolCode, ids, pageable);
     }
     
     public Test getTest(Long id) {

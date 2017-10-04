@@ -20,12 +20,12 @@ public class TestResultsController {
 	@Autowired
 	private AssessmentService assessmentService;
 	
-	@GetMapping("/test-results")
+	@GetMapping("/test-result")
 	public List<TestResults> getTestResults(){
     	return assessmentService.getTestResults();
     }
     
-	@GetMapping("/test-result")
+	@GetMapping(value="/test-result", params="ids")
     public List<TestResults> getTestResultsBasedOnIds(@RequestParam List<Long> ids){
     	return assessmentService.getTestResultsBasedOnIds(ids);
     }
